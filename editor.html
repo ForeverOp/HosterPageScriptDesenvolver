@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>RAW Creator</title>
+<style>
+body{background:#000;color:#0f0;font-family:monospace;padding:15px}
+textarea{width:100%;height:200px;background:#000;color:#0f0;border:2px solid #0f0}
+pre{border:2px solid #0f0;padding:10px;margin-bottom:10px;cursor:pointer}
+button{width:100%;padding:12px;margin-top:10px}
+</style>
+</head>
+<body>
+
+<pre id="link">// link raw</pre>
+
+<textarea id="code" placeholder="Cole o script Lua"></textarea>
+<button onclick="criar()">Criar RAW</button>
+<button onclick="abrir()">Abrir RAW</button>
+
+<script>
+let count = Number(localStorage.getItem("raw_count") || 0) + 1;
+localStorage.setItem("raw_count", count);
+
+const id = "lua." + count;
+
+function criar(){
+  const code = document.getElementById("code").value;
+  if(!code.trim()) return;
+
+  localStorage.setItem("raw_"+id, code);
+
+  const link = location.origin + "/raw.html#" + id;
+  document.getElementById("link").textContent = link;
+}
+
+function abrir(){
+  const link = document.getElementById("link").textContent;
+  if(link.startsWith("http")) window.open(link);
+}
+</script>
+
+</body>
+</html>
