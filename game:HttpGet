@@ -1,0 +1,1 @@
+game:HttpGet(BASE_URL .. id .. ".lua")
