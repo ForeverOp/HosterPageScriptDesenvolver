@@ -1,2 +1,5 @@
-/index.html              -> Página principal, lista RAWs
-/raw.html                -> Página RAW única, identifica o número do RAW
+/lua/
+ ├─ 1.lua
+ ├─ 2.lua
+ ├─ 3.lua
+ └─ loader.lua
