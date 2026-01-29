@@ -14,17 +14,18 @@
   }
 
   .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 20px;
   }
 
   .box {
+    flex: 1;
     border: 1px solid #0f0;
-    padding: 15px;
-    height: 80vh;
     display: flex;
     flex-direction: column;
+    height: 80vh;
+    padding: 10px;
+    box-sizing: border-box;
   }
 
   h2 {
@@ -36,11 +37,11 @@
     flex: 1;
     background: #111;
     color: #0f0;
-    border: none;
+    border: 1px solid #0f0;
     resize: none;
     outline: none;
-    padding: 10px;
     font-size: 14px;
+    padding: 10px;
   }
 
   input, button {
@@ -61,14 +62,14 @@
 
 <div class="container">
 
-  <!-- QUADRO 1 -->
+  <!-- QUADRO 1: Colar Script -->
   <div class="box">
     <h2>Colar Script → Criar RAW</h2>
     <textarea id="scriptBox" placeholder="Cole o script aqui..."></textarea>
     <button onclick="createRaw()">Criar e Abrir RAW</button>
   </div>
 
-  <!-- QUADRO 2 -->
+  <!-- QUADRO 2: Abrir RAW por Número -->
   <div class="box">
     <h2>Abrir RAW por Número</h2>
     <textarea disabled placeholder="Digite o número abaixo e abra o RAW correspondente"></textarea>
@@ -79,6 +80,7 @@
 </div>
 
 <script>
+  // QUADRO 1: Criar RAW
   function createRaw() {
     const text = document.getElementById('scriptBox').value;
     if (!text) return alert('Cole um script primeiro');
@@ -92,6 +94,7 @@
     window.open(`raw.html?raw=${id}`, '_blank');
   }
 
+  // QUADRO 2: Abrir RAW por número
   function openRaw() {
     const num = document.getElementById('rawNumber').value;
     if (!num) return alert('Digite um número');
