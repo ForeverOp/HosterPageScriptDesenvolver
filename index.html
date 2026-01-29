@@ -2,56 +2,88 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>RAW Editor</title>
+  <title>RAW Manager</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: monospace;
-      background-color: #0c0c0c;
-      color: #00ff00;
-    }
-
-    header {
-      background-color: #111;
-      padding: 10px 20px;
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #0f0;
-    }
-
-    textarea {
-      width: 100%;
-      height: calc(100vh - 50px);
       background: #111;
       color: #0f0;
-      border: none;
-      outline: none;
-      resize: none;
-      font-size: 14px;
-      padding: 10px;
-      box-sizing: border-box;
+      padding: 20px;
+    }
+    button {
+      background: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 8px 15px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    input {
+      padding: 5px;
+      width: 50px;
+      margin-right: 10px;
     }
   </style>
 </head>
 <body>
 
-<header>RAW Page - Editável</header>
+<h1>RAW Manager</h1>
 
-<textarea placeholder="Digite ou cole seu script/HTML aqui..."></textarea>
+<div>
+  <input id="rawNumber" type="number" placeholder="nº RAW" min="1">
+  <button onclick="openRaw()">Abrir RAW</button>
+  <button onclick="createRaw()">Criar RAW</button>
+</div>
+
+<p id="status"></p>
 
 <script>
-  // Mantém o foco sempre no textarea
-  const textarea = document.querySelector('textarea');
-  textarea.focus();
+  // Base URL da pasta raw
+  const baseURL = 'raw/';
 
-  // Salva no localStorage para manter o texto ao atualizar a página
-  textarea.value = localStorage.getItem('rawContent') || '';
-  textarea.addEventListener('input', () => {
-    localStorage.setItem('rawContent', textarea.value);
-  });
+  function openRaw() {
+    const num = document.getElementById('rawNumber').value;
+    if (!num) return alert('Digite o número do RAW');
+    
+    // Link direto para a página raw
+    const url = `${baseURL}${num}.html`;
+    window.open(url, '_blank');
+  }
+
+  function createRaw() {
+    const num = document.getElementById('rawNumber').value;
+    if (!num) return alert('Digite o número do RAW');
+
+    // Cria um RAW virtual (abre em nova aba com conteúdo padrão)
+    const rawContent = `
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8">
+        <title>RAW ${num}</title>
+        <style>
+          body { background: #0c0c0c; color: #0f0; font-family: monospace; margin:0; }
+          textarea { width:100%; height:100vh; background:#111; color:#0f0; border:none; outline:none; font-size:14px; padding:10px; box-sizing:border-box;}
+        </style>
+      </head>
+      <body>
+        <textarea placeholder="Digite aqui..."></textarea>
+        <script>
+          const textarea = document.querySelector('textarea');
+          textarea.value = localStorage.getItem('raw_${num}') || '';
+          textarea.addEventListener('input', () => {
+            localStorage.setItem('raw_${num}', textarea.value);
+          });
+        </script>
+      </body>
+      </html>
+    `;
+
+    const newWindow = window.open();
+    newWindow.document.write(rawContent);
+    newWindow.document.close();
+  }
 </script>
 
 </body>
