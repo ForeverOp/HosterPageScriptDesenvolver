@@ -1,3 +1,7 @@
+-- ===============================
+-- MULTI RAW LOADER (1 até 50)
+-- ===============================
+
 local RAW_LIST = {
   1, 2, 3, 4, 5,
   6, 7, 8, 9, 10,
@@ -10,3 +14,11 @@ local RAW_LIST = {
   41, 42, 43, 44, 45,
   46, 47, 48, 49, 50
 }
+
+local BASE_URL = "https://raw.githubusercontent.com/foreverop/HosterPageScriptDesenvolver/main/lua/"
+
+for _, id in ipairs(RAW_LIST) do
+    pcall(function()
+        loadstring(game:HttpGet(BASE_URL .. id .. ".lua"))()
+    end)
+end
