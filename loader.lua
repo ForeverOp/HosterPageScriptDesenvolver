@@ -1,23 +1,12 @@
--- ===============================
--- UNIVERSAL LUA LOADER
--- Autor: você
--- ===============================
-
--- 🔢 MUDE APENAS ESTE NÚMERO
-local RAW_ID = 2
-
--- 🌐 BASE DO SEU REPOSITÓRIO (raw.githubusercontent.com)
-local BASE_URL = "https://raw.githubusercontent.com/foreverop/HosterPageScriptDesenvolver/main/lua/"
-
--- 🔗 MONTA A URL FINAL
-local SCRIPT_URL = BASE_URL .. RAW_ID .. ".lua"
-
--- 🚀 CARREGA E EXECUTA
-local success, result = pcall(function()
-    return loadstring(game:HttpGet(SCRIPT_URL))()
-end)
-
-if not success then
-    warn("Erro ao carregar o RAW " .. RAW_ID)
-    warn(result)
-end
+local RAW_LIST = {
+  1, 2, 3, 4, 5,
+  6, 7, 8, 9, 10,
+  11, 12, 13, 14, 15,
+  16, 17, 18, 19, 20,
+  21, 22, 23, 24, 25,
+  26, 27, 28, 29, 30,
+  31, 32, 33, 34, 35,
+  36, 37, 38, 39, 40,
+  41, 42, 43, 44, 45,
+  46, 47, 48, 49, 50
+}
