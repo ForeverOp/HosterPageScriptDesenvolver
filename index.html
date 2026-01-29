@@ -1,88 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>RAW Manager</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: monospace;
-      background: #111;
-      color: #0f0;
-      padding: 20px;
-    }
-    button {
-      background: #222;
-      color: #0f0;
-      border: 1px solid #0f0;
-      padding: 8px 15px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    input {
-      padding: 5px;
-      width: 50px;
-      margin-right: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>RAW Creator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #0c0c0c;
+    color: #0f0;
+    font-family: monospace;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .box {
+    border: 1px solid #0f0;
+    padding: 15px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+
+  textarea {
+    flex: 1;
+    background: #111;
+    color: #0f0;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  input, button {
+    margin-top: 10px;
+    padding: 8px;
+    background: #111;
+    color: #0f0;
+    border: 1px solid #0f0;
+    font-family: monospace;
+  }
+
+  button {
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
 
-<h1>RAW Manager</h1>
+<div class="container">
 
-<div>
-  <input id="rawNumber" type="number" placeholder="nº RAW" min="1">
-  <button onclick="openRaw()">Abrir RAW</button>
-  <button onclick="createRaw()">Criar RAW</button>
+  <!-- QUADRO 1 -->
+  <div class="box">
+    <h2>Colar Script → Criar RAW</h2>
+    <textarea id="scriptBox" placeholder="Cole o script aqui..."></textarea>
+    <button onclick="createRaw()">Criar e Abrir RAW</button>
+  </div>
+
+  <!-- QUADRO 2 -->
+  <div class="box">
+    <h2>Abrir RAW por Número</h2>
+    <textarea disabled placeholder="Digite o número abaixo e abra o RAW correspondente"></textarea>
+    <input id="rawNumber" type="number" placeholder="Número do RAW">
+    <button onclick="openRaw()">Abrir RAW</button>
+  </div>
+
 </div>
 
-<p id="status"></p>
-
 <script>
-  // Base URL da pasta raw
-  const baseURL = 'raw/';
+  function createRaw() {
+    const text = document.getElementById('scriptBox').value;
+    if (!text) return alert('Cole um script primeiro');
+
+    let id = localStorage.getItem('raw_last_id');
+    id = id ? parseInt(id) + 1 : 1;
+
+    localStorage.setItem(`raw_${id}`, text);
+    localStorage.setItem('raw_last_id', id);
+
+    window.open(`raw.html?raw=${id}`, '_blank');
+  }
 
   function openRaw() {
     const num = document.getElementById('rawNumber').value;
-    if (!num) return alert('Digite o número do RAW');
-    
-    // Link direto para a página raw
-    const url = `${baseURL}${num}.html`;
-    window.open(url, '_blank');
-  }
-
-  function createRaw() {
-    const num = document.getElementById('rawNumber').value;
-    if (!num) return alert('Digite o número do RAW');
-
-    // Cria um RAW virtual (abre em nova aba com conteúdo padrão)
-    const rawContent = `
-      <!DOCTYPE html>
-      <html lang="pt-BR">
-      <head>
-        <meta charset="UTF-8">
-        <title>RAW ${num}</title>
-        <style>
-          body { background: #0c0c0c; color: #0f0; font-family: monospace; margin:0; }
-          textarea { width:100%; height:100vh; background:#111; color:#0f0; border:none; outline:none; font-size:14px; padding:10px; box-sizing:border-box;}
-        </style>
-      </head>
-      <body>
-        <textarea placeholder="Digite aqui..."></textarea>
-        <script>
-          const textarea = document.querySelector('textarea');
-          textarea.value = localStorage.getItem('raw_${num}') || '';
-          textarea.addEventListener('input', () => {
-            localStorage.setItem('raw_${num}', textarea.value);
-          });
-        </script>
-      </body>
-      </html>
-    `;
-
-    const newWindow = window.open();
-    newWindow.document.write(rawContent);
-    newWindow.document.close();
+    if (!num) return alert('Digite um número');
+    window.open(`raw.html?raw=${num}`, '_blank');
   }
 </script>
 
