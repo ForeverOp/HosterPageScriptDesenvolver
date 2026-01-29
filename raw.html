@@ -1,64 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>RAW Editor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: monospace;
-      background: #0c0c0c;
-      color: #0f0;
-    }
-    header {
-      background: #111;
-      padding: 10px 20px;
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #0f0;
-    }
-    textarea {
-      width: 100%;
-      height: calc(100vh - 50px);
-      background: #111;
-      color: #0f0;
-      border: none;
-      outline: none;
-      resize: none;
-      font-size: 14px;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>RAW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    background: #0c0c0c;
+    color: #0f0;
+    font-family: monospace;
+  }
+  header {
+    padding: 10px;
+    text-align: center;
+    background: #111;
+    border-bottom: 1px solid #0f0;
+  }
+  textarea {
+    width: 100%;
+    height: calc(100vh - 45px);
+    background: #111;
+    color: #0f0;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+</style>
 </head>
 <body>
 
-<header id="rawHeader">RAW Page</header>
-<textarea placeholder="Digite aqui..."></textarea>
+<header id="title">RAW</header>
+<textarea id="editor" placeholder="RAW vazio..."></textarea>
 
 <script>
-  const textarea = document.querySelector('textarea');
-  const header = document.getElementById('rawHeader');
+  const params = new URLSearchParams(window.location.search);
+  const rawId = params.get('raw') || '0';
 
-  // Pega o número do RAW da URL (ex: /raw.html?1 ou /1)
-  const urlParams = new URLSearchParams(window.location.search);
-  let rawNumber = urlParams.get('raw');
+  document.getElementById('title').innerText = `RAW ${rawId}`;
 
-  if (!rawNumber) {
-    // Se não houver query string, tenta pegar do path (ex: /1)
-    const pathMatch = window.location.pathname.match(/\/(\d+)$/);
-    rawNumber = pathMatch ? pathMatch[1] : '0';
-  }
+  const editor = document.getElementById('editor');
+  editor.value = localStorage.getItem(`raw_${rawId}`) || '';
 
-  header.textContent = `RAW ${rawNumber}`;
-
-  // Salva no localStorage por número do RAW
-  textarea.value = localStorage.getItem(`raw_${rawNumber}`) || '';
-  textarea.addEventListener('input', () => {
-    localStorage.setItem(`raw_${rawNumber}`, textarea.value);
+  editor.addEventListener('input', () => {
+    localStorage.setItem(`raw_${rawId}`, editor.value);
   });
 </script>
 
