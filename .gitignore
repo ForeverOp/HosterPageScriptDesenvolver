@@ -1,41 +1,85 @@
-# Prerequisites
-*.d
+# ===============================
+# C++ / Compiladores
+# ===============================
 
-# Compiled Object files
-*.slo
-*.lo
+# Arquivos objeto
 *.o
 *.obj
+*.lo
+*.slo
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
+# Bibliotecas
 *.a
 *.lib
+*.so
+*.dll
+*.dylib
 
-# Executables
+# Executáveis
 *.exe
 *.out
 *.app
 
-# debug information files
-*.dwo
+# ===============================
+# Build / Compilação
+# ===============================
+build/
+bin/
+obj/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.cmake
+install_manifest.txt
+
+# ===============================
+# IDEs / Editores
+# ===============================
+
+# Visual Studio
+.vs/
+*.vcxproj*
+*.sln
+*.user
+*.pdb
+*.ipch
+
+# VS Code
+.vscode/
+
+# CLion / JetBrains
+.idea/
+cmake-build-debug/
+cmake-build-release/
+
+# Code::Blocks
+*.cbp
+*.layout
+*.depend
+
+# ===============================
+# Sistemas Operacionais
+# ===============================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ===============================
+# Logs e temporários
+# ===============================
+*.log
+*.tmp
+*.temp
+*.swp
+*.bak
