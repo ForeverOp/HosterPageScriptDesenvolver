@@ -1,1 +1,1 @@
-game:HttpGet(BASE_URL .. id .. ".lua")
+game:HttpGet(https://foreverop.github.io/HosterPageScriptDesenvolver/.lua")
