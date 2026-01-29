@@ -1,6 +1,4 @@
-HosterPageScriptDesenvolver
- ├─ index.html
- ├─ raw.html
+HosterPageScriptDesenvolver/
  └─ lua/
      ├─ 1.lua
      ├─ 2.lua
