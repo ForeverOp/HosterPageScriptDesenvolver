@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>RAW Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: monospace;
+      background-color: #0c0c0c;
+      color: #00ff00;
+    }
+
+    header {
+      background-color: #111;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0f0;
+    }
+
+    textarea {
+      width: 100%;
+      height: calc(100vh - 50px);
+      background: #111;
+      color: #0f0;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 14px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+<header>RAW Page - Editável</header>
+
+<textarea placeholder="Digite ou cole seu script/HTML aqui..."></textarea>
+
+<script>
+  // Mantém o foco sempre no textarea
+  const textarea = document.querySelector('textarea');
+  textarea.focus();
+
+  // Salva no localStorage para manter o texto ao atualizar a página
+  textarea.value = localStorage.getItem('rawContent') || '';
+  textarea.addEventListener('input', () => {
+    localStorage.setItem('rawContent', textarea.value);
+  });
+</script>
+
+</body>
+</html>
