@@ -1,7 +1,7 @@
 HosterPageScriptDesenvolver/
-├── scripts/
-│   ├── 1.lua
-│   ├── 2.lua
-│   ├── 3.lua
-│   └── 4.lua
-└── index.html
+├── index.html        ← painel (visual, só pra você)
+└── scripts/
+    ├── 1.lua         ← RAW 100% Lua
+    ├── 2.lua
+    ├── 3.lua
+    └── ...
