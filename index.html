@@ -3,61 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Lua RAW Hoster</title>
-<style>
-body {
-  background:#000;
-  color:#0f0;
-  font-family:monospace;
-  padding:20px;
-}
-textarea {
-  width:100%;
-  height:300px;
-  background:#000;
-  color:#0f0;
-  border:1px solid #0f0;
-}
-button {
-  margin-top:10px;
-  padding:10px;
-  background:#0f0;
-  color:#000;
-  border:none;
-  cursor:pointer;
-}
-</style>
 </head>
-<body>
+<body style="background:#000;color:#0f0;font-family:monospace">
 
 <h2>Lua RAW Generator</h2>
 
-<textarea id="luaCode" placeholder="Cole seu script Lua aqui..."></textarea>
-<br>
-<button onclick="generate()">Gerar info</button>
+<textarea id="code" style="width:100%;height:300px"></textarea><br>
+<button onclick="save()">Salvar</button>
 
-<pre id="output"></pre>
+<pre id="out"></pre>
 
 <script>
-let id = localStorage.getItem("lua_id") || 1;
-
-function generate() {
-  const code = document.getElementById("luaCode").value.trim();
-  if (!code) return;
-
-  const rawLink =
-`https://raw.githubusercontent.com/foreverop/HosterPageScriptDesenvolver/main/scripts/${id}.lua`;
-
-  document.getElementById("output").textContent =
-`Arquivo a criar: scripts/${id}.lua
-
-Cole EXATAMENTE este conteúdo no arquivo:
-
-${code}
-
-Link RAW (loadstring):
-${rawLink}`;
-
-  localStorage.setItem("lua_id", ++id);
+async function save() {
+  const code = document.getElementById("code").value;
+  const r = await fetch("save.php", {
+    method: "POST",
+    body: code
+  });
+  const txt = await r.text();
+  document.getElementById("out").textContent = txt;
 }
 </script>
 
