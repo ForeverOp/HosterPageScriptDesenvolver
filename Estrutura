@@ -1,7 +1,7 @@
-HosterPageScriptDesenvolver/
-├── index.html        ← painel (visual, só pra você)
-└── scripts/
-    ├── 1.lua         ← RAW 100% Lua
+/public_html/
+├── index.html        ← painel
+├── save.php          ← salva scripts
+└── raw/
+    ├── 1.lua
     ├── 2.lua
-    ├── 3.lua
     └── ...
