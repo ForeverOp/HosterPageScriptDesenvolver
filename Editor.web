@@ -44,20 +44,23 @@ small{opacity:.6}
 <h2>Lua RAW Uploader</h2>
 <small>Cole seu script Lua abaixo</small>
 
-<textarea id="code" placeholder="print('Hello Roblox')"></textarea>
+<textarea id="code" placeholder="print('FUNCIONA NO LOADSTRING')"></textarea>
 
 <button onclick="enviar()">CRIAR RAW</button>
 
 <pre id="out">// link RAW aparecerá aqui</pre>
 
 <script>
-const WORKER = "https://SEUWORKER.workers.dev/upload";
+const WORKER_UPLOAD = "https://ForeverOp.workers.dev/upload";
 
 async function enviar(){
   const code = document.getElementById("code").value;
-  if(!code.trim()) return alert("Lua vazio");
+  if(!code.trim()){
+    alert("Lua vazio");
+    return;
+  }
 
-  const res = await fetch(WORKER, {
+  const res = await fetch(WORKER_UPLOAD, {
     method: "POST",
     body: code
   });
@@ -67,14 +70,16 @@ async function enviar(){
   const out = document.getElementById("out");
   out.textContent = link;
 
-  // copiar automático
+  // copia automático
   navigator.clipboard.writeText(link);
 }
 
 // clicar no link abre
-document.getElementById("out").onclick = () => {
-  const t = out.textContent;
-  if(t.startsWith("http")) window.open(t);
+const out = document.getElementById("out");
+out.onclick = () => {
+  if(out.textContent.startsWith("http")){
+    window.open(out.textContent);
+  }
 };
 </script>
 
