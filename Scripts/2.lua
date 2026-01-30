@@ -1,4 +1,6 @@
-print("Script 2 carregado com sucesso")
+print("Script 1 carregado")
 
 local Players = game:GetService("Players")
-print(Players.LocalPlayer.Name)
+local player = Players.LocalPlayer
+
+print("Player:", player.Name)
