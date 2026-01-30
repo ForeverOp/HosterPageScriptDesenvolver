@@ -1,0 +1,2 @@
+curl -X POST https://SEUWORKER.workers.dev/upload \
+     --data "print('FUNCIONA')"
