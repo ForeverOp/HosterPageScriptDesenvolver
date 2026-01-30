@@ -1,0 +1,41 @@
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const path = url.pathname;
+
+    // POST /upload  -> cria novo RAW
+    if (request.method === "POST" && path === "/upload") {
+      const lua = await request.text();
+      if (!lua.trim()) {
+        return new Response("empty", { status: 400 });
+      }
+
+      let id = (await env.DB.get("count")) || "0";
+      id = Number(id) + 1;
+
+      await env.DB.put("lua:" + id, lua);
+      await env.DB.put("count", String(id));
+
+      return new Response(
+        `https://${url.host}/lua/${id}`,
+        { headers: { "Content-Type": "text/plain" } }
+      );
+    }
+
+    // GET /lua/ID  -> retorna RAW
+    if (path.startsWith("/lua/")) {
+      const id = path.split("/")[2];
+      const lua = await env.DB.get("lua:" + id);
+
+      if (!lua) {
+        return new Response("not found", { status: 404 });
+      }
+
+      return new Response(lua, {
+        headers: { "Content-Type": "text/plain; charset=utf-8" }
+      });
+    }
+
+    return new Response("ok");
+  }
+};
