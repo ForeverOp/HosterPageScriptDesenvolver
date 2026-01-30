@@ -1,27 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Lua RAW Hoster</title>
-</head>
-<body style="background:#000;color:#0f0;font-family:monospace">
+<html>
+<body style="background:black;color:#0f0;font-family:monospace">
 
-<h2>Lua RAW Generator</h2>
-
-<textarea id="code" style="width:100%;height:300px"></textarea><br>
-<button onclick="save()">Salvar</button>
-
+<textarea id="code" style="width:100%;height:300px"></textarea>
+<button onclick="send()">Salvar</button>
 <pre id="out"></pre>
 
 <script>
-async function save() {
-  const code = document.getElementById("code").value;
-  const r = await fetch("save.php", {
+async function send(){
+  const r = await fetch("https://SEU_BACKEND/save", {
     method: "POST",
-    body: code
+    body: document.getElementById("code").value
   });
-  const txt = await r.text();
-  document.getElementById("out").textContent = txt;
+  document.getElementById("out").textContent = await r.text();
 }
 </script>
 
