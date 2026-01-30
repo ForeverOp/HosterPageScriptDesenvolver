@@ -12,15 +12,15 @@ button{width:100%;padding:12px;margin-top:10px}
 </head>
 <body>
 
-<pre id="link">// link raw</pre>
+<pre id="link">// link lua</pre>
 
 <textarea id="code" placeholder="Cole o script Lua"></textarea>
-<button onclick="criar()">Criar RAW</button>
-<button onclick="abrir()">Abrir RAW</button>
+<button onclick="criar()">Criar lua</button>
+<button onclick="abrir()">Abrir lua</button>
 
 <script>
-let count = Number(localStorage.getItem("raw_count") || 0) + 1;
-localStorage.setItem("raw_count", count);
+let count = Number(localStorage.getItem("lua_count") || 0) + 1;
+localStorage.setItem("lua_count", count);
 
 const id = "lua." + count;
 
