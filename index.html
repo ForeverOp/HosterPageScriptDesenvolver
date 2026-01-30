@@ -1,105 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>RAW Creator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lua RAW Hoster</title>
 <style>
-  body {
-    margin: 0;
-    padding: 20px;
-    background: #0c0c0c;
-    color: #0f0;
-    font-family: monospace;
-  }
-
-  .container {
-    display: flex;
-    gap: 20px;
-  }
-
-  .box {
-    flex: 1;
-    border: 1px solid #0f0;
-    display: flex;
-    flex-direction: column;
-    height: 80vh;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  h2 {
-    margin: 0 0 10px 0;
-    text-align: center;
-  }
-
-  textarea {
-    flex: 1;
-    background: #111;
-    color: #0f0;
-    border: 1px solid #0f0;
-    resize: none;
-    outline: none;
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  input, button {
-    margin-top: 10px;
-    padding: 8px;
-    background: #111;
-    color: #0f0;
-    border: 1px solid #0f0;
-    font-family: monospace;
-  }
-
-  button {
-    cursor: pointer;
-  }
+body {
+  background:#000;
+  color:#0f0;
+  font-family:monospace;
+  padding:20px;
+}
+textarea {
+  width:100%;
+  height:300px;
+  background:#000;
+  color:#0f0;
+  border:1px solid #0f0;
+}
+button {
+  margin-top:10px;
+  padding:10px;
+  background:#0f0;
+  color:#000;
+  border:none;
+  cursor:pointer;
+}
 </style>
 </head>
 <body>
 
-<div class="container">
+<h2>Lua RAW Generator</h2>
 
-  <!-- QUADRO 1: Colar Script -->
-  <div class="box">
-    <h2>Colar Script → Criar RAW</h2>
-    <textarea id="scriptBox" placeholder="Cole o script aqui..."></textarea>
-    <button onclick="createRaw()">Criar e Abrir RAW</button>
-  </div>
+<textarea id="luaCode" placeholder="Cole seu script Lua aqui..."></textarea>
+<br>
+<button onclick="generate()">Gerar info</button>
 
-  <!-- QUADRO 2: Abrir RAW por Número -->
-  <div class="box">
-    <h2>Abrir RAW por Número</h2>
-    <textarea disabled placeholder="Digite o número abaixo e abra o RAW correspondente"></textarea>
-    <input id="rawNumber" type="number" placeholder="Número do RAW">
-    <button onclick="openRaw()">Abrir RAW</button>
-  </div>
-
-</div>
+<pre id="output"></pre>
 
 <script>
-  // QUADRO 1: Criar RAW
-  function createRaw() {
-    const text = document.getElementById('scriptBox').value;
-    if (!text) return alert('Cole um script primeiro');
+let id = localStorage.getItem("lua_id") || 1;
 
-    let id = localStorage.getItem('raw_last_id');
-    id = id ? parseInt(id) + 1 : 1;
+function generate() {
+  const code = document.getElementById("luaCode").value.trim();
+  if (!code) return;
 
-    localStorage.setItem(`raw_${id}`, text);
-    localStorage.setItem('raw_last_id', id);
+  const rawLink =
+`https://raw.githubusercontent.com/foreverop/HosterPageScriptDesenvolver/main/scripts/${id}.lua`;
 
-    window.open(`lua.foreverop');
-  }
+  document.getElementById("output").textContent =
+`Arquivo a criar: scripts/${id}.lua
 
-  // QUADRO 2: Abrir RAW por número
-  function openRaw() {
-    const num = document.getElementById('rawNumber').value;
-    if (!num) return alert('Digite um número');
-    window.open(`https://foreverop.github.io/HosterPageScriptDesenvolver/.lua');
-  }
+Cole EXATAMENTE este conteúdo no arquivo:
+
+${code}
+
+Link RAW (loadstring):
+${rawLink}`;
+
+  localStorage.setItem("lua_id", ++id);
+}
 </script>
 
 </body>
