@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <body style="background:black;color:#0f0;font-family:monospace">
 
-<textarea id="code" style="width:100%;height:300px"></textarea>
+<h3>Lua RAW Uploader</h3>
+
+<textarea id="code" style="width:100%;height:300px"></textarea><br>
 <button onclick="send()">Salvar</button>
+
 <pre id="out"></pre>
 
 <script>
 async function send(){
-  const r = await fetch("https://SEU_BACKEND/save", {
+  const r = await fetch("https://SEU-BACKEND.onrender.com/save", {
     method: "POST",
     body: document.getElementById("code").value
   });
