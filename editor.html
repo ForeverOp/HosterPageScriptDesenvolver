@@ -28,9 +28,9 @@ function criar(){
   const code = document.getElementById("code").value;
   if(!code.trim()) return;
 
-  localStorage.setItem("raw_"+id, code);
+  localStorage.setItem("main"+id, code);
 
-  const link = location.origin + "/raw.html#" + id;
+  const link = location.origin + "/main" + id;
   document.getElementById("link").textContent = link;
 }
 
