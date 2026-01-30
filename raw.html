@@ -1,56 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>RAW</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  body {
-    margin: 0;
-    background: #0c0c0c;
-    color: #0f0;
-    font-family: monospace;
-  }
-  header {
-    padding: 10px;
-    text-align: center;
-    background: #111;
-    border-bottom: 1px solid #0f0;
-  }
-  textarea {
-    width: 100%;
-    height: calc(100vh - 45px);
-    background: #111;
-    color: #0f0;
-    border: none;
-    outline: none;
-    resize: none;
-    padding: 10px;
-    font-size: 14px;
-    box-sizing: border-box;
-  }
+body{
+  margin:0;
+  padding:10px;
+  background:#000;
+  color:#0f0;
+  font-family:monospace;
+  white-space:pre-wrap;
+}
 </style>
 </head>
 <body>
-
-<header id="title">RAW</header>
-<textarea id="editor" placeholder="RAW vazio..."></textarea>
-
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const rawId = params.get('raw') || '0';
-
-  document.getElementById('title').innerText = `RAW ${rawId}`;
-
-  const editor = document.getElementById('editor');
-  editor.value = localStorage.getItem(`raw_${rawId}`) || '';
-
-  editor.addEventListener('input', () => {
-    localStorage.setItem(`raw_${rawId}`, editor.value);
-  });
+const id = location.hash.slice(1);
+const data = localStorage.getItem("raw_" + id);
+document.body.textContent = data || "RAW não encontrado";
 </script>
-
 </body>
 </html>
-
-https://foreverop.github.io/raw.lua.1
