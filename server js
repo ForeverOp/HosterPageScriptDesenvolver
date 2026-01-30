@@ -1,0 +1,32 @@
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+
+const app = express();
+app.use(express.text({ limit: "5mb" }));
+
+const RAW_DIR = path.join(__dirname, "raw");
+if (!fs.existsSync(RAW_DIR)) fs.mkdirSync(RAW_DIR);
+
+app.post("/save", (req, res) => {
+  const code = req.body;
+  if (!code) return res.status(400).send("vazio");
+
+  const files = fs.readdirSync(RAW_DIR).filter(f => f.endsWith(".lua"));
+  const id = files.length + 1;
+
+  fs.writeFileSync(path.join(RAW_DIR, `${id}.lua`), code);
+  res.send(`OK\nhttps://SEU_BACKEND/raw/${id}.lua`);
+});
+
+app.get("/raw/:id.lua", (req, res) => {
+  const file = path.join(RAW_DIR, req.params.id + ".lua");
+  if (!fs.existsSync(file)) return res.status(404).send("não existe");
+
+  res.setHeader("Content-Type", "text/plain");
+  res.send(fs.readFileSync(file, "utf8"));
+});
+
+app.listen(3000, () =>
+  console.log("Backend ativo na porta 3000")
+);
