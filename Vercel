@@ -1,0 +1,12 @@
+[ GitHub Pages ]
+   index.html (painel)
+        |
+        | fetch()
+        v
+[ Node.js Backend ]
+   salva scripts
+   gera 1.lua, 2.lua...
+        |
+        v
+[ RAW REAL ]
+https://seu-backend/raw/1.lua
