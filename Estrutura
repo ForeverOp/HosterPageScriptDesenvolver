@@ -1,8 +1,7 @@
 HosterPageScriptDesenvolver/
-├─ index.html         ← PÁGINA WEB PRINCIPAL (HTML)
-├─ raw.html           ← EDITOR WEB (HTML + JS)
-└─ lua/               ← PASTA COM SCRIPTS LUA PURO
-    ├─ 1.lua          ← Lua executável
-    ├─ 2.lua
-    ├─ 3.lua
-    └─ … até 200.lua
+├── scripts/
+│   ├── 1.lua
+│   ├── 2.lua
+│   ├── 3.lua
+│   └── 4.lua
+└── index.html
